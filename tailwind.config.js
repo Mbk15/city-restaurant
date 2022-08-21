@@ -42,10 +42,12 @@ module.exports = {
       colors: {
         textColor: "#101010",
         activeText: "#D6230A",
+        headingColor: "#2e2e2e",
         gradientBg: "rgba(116, 249, 105,0.4)",
         whiteAlpha: "rgba(255,255,255,0.2)",
         cardColor: "#f5f5f5",
         cartBg: "#282a2c",
+        cartNumBg: "#e80013",
         cartItem: "#2e3033",
         cartTotal: "#343739",
       },
