@@ -1,17 +1,33 @@
 import React from "react";
 import { MdShoppingBasket } from "react-icons/md";
+import { motion } from "framer-motion";
 import Logo from "../img/logo.png";
 import Avatar from "../img/avatar.png";
+import { Link } from "react-router-dom";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "../firebase.config";
 const Header = () => {
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  const login = async () => {
+    const response = await signInWithPopup(firebaseAuth, provider);
+    console.log(response);
+  };
   return (
-    <header className="fixed w-screen z-50 p-6 bg-gray-300">
+    <header className="fixed w-screen z-50 p-6">
       {/* Desktop & Tablet */}
       <div className="hidden md:flex items-center justify-between w-full h-full">
         {/* Logo section */}
-        <div className="flex items-center gap-2 ">
-          <img className="w-8 object-cover" src={Logo} alt="logo" />
+        <Link to={"/"} className="flex items-center gap-2 cursor-pointer ">
+          <motion.img
+            whileTap={{ scale: 0.4 }}
+            className="w-8 object-cover"
+            src={Logo}
+            alt="logo"
+          />
           <p className="text-textColor text-xl font-bold">City</p>
-        </div>
+        </Link>
         {/* Nav links  */}
         <div className="flex items-center gap-8">
           <ul className="flex items-center gap-8 ">
@@ -37,11 +53,15 @@ const Header = () => {
           </div>
 
           {/* Avatar profile */}
-          <img
-            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl"
-            src={Avatar}
-            alt="user-profile"
-          />
+          <div className="relative">
+            <motion.img
+              whileTap={{ scale: 0.6 }}
+              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer"
+              src={Avatar}
+              alt="user-profile"
+              onClick={login}
+            />
+          </div>
         </div>
       </div>
       {/* Mobile device */}
