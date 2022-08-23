@@ -6,13 +6,24 @@ import Avatar from "../img/avatar.png";
 import { Link } from "react-router-dom";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../firebase.config";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
+  const [{ user }, dispatch] = useStateValue();
 
   const login = async () => {
-    const response = await signInWithPopup(firebaseAuth, provider);
-    console.log(response);
+    if (!user) {
+      const {
+        user: { refreshToken, providerData },
+      } = await signInWithPopup(firebaseAuth, provider);
+      dispatch({
+        type: actionType.SET_USER,
+        user: providerData[0],
+      });
+      localStorage.setItem("user", JSON.stringify(providerData[0])); // set user data to local storage
+    }
   };
   return (
     <header className="fixed w-screen z-50 p-6">
@@ -35,10 +46,10 @@ const Header = () => {
               Home
             </li>
             <li className="text-base text-textColor hover:text-activeText cursor-pointer duration-100 transition-all ease-in-ease-out">
-              About Us
+              Menu
             </li>
             <li className="text-base text-textColor hover:text-activeText cursor-pointer duration-100 transition-all ease-in-ease-out">
-              Contact
+              About Us
             </li>{" "}
             <li className="text-base text-textColor hover:text-activeText cursor-pointer duration-100 transition-all ease-in-ease-out">
               Services
@@ -56,8 +67,8 @@ const Header = () => {
           <div className="relative">
             <motion.img
               whileTap={{ scale: 0.6 }}
-              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer"
-              src={Avatar}
+              className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer rounded-full"
+              src={user ? user.photoURL : Avatar}
               alt="user-profile"
               onClick={login}
             />
