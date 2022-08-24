@@ -3,7 +3,7 @@ import { Header, MainContainer, CreateContainer } from "./components";
 import { AnimatePresence } from "framer-motion";
 function App() {
   return (
-    <AnimatePresence>
+    <AnimatePresence exitBeforeEnter>
       <div className="w-screen h-auto flex flex-col bg-primary">
         <Header />
         <main className="w-full mt-24 p-8 ">
