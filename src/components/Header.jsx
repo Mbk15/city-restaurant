@@ -28,7 +28,7 @@ const Header = () => {
     }
   };
   return (
-    <header className="fixed w-screen z-50 p-6">
+    <header className="fixed w-screen z-50 p-3 px-4 md:p-6 md:px-16">
       {/* Desktop & Tablet */}
       <div className="hidden md:flex items-center justify-between w-full h-full">
         {/* Logo section */}
@@ -104,7 +104,67 @@ const Header = () => {
         </div>
       </div>
       {/* Mobile device */}
-      <div className="flex md:hidden w-full h-full"></div>
+      <div className="flex md:hidden justify-between w-full h-full">
+        {/* Logo section */}
+        <Link to={"/"} className="flex items-center gap-2 cursor-pointer ">
+          <motion.img
+            whileTap={{ scale: 0.4 }}
+            className="w-8 object-cover"
+            src={Logo}
+            alt="logo"
+          />
+          <p className="text-textColor text-xl font-bold">City</p>
+        </Link>
+        {/* Avatar profile */}
+        <div className="relative">
+          <motion.img
+            whileTap={{ scale: 0.6 }}
+            className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-2xl cursor-pointer rounded-full"
+            src={user ? user.photoURL : Avatar}
+            alt="user-profile"
+            onClick={login}
+          />
+          {/* Drop down Menu */}
+          {isMenu && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.6 }}
+              className=" w-40 bg-gray-50 absolute rounded-lg shadow-xl flex flex-col top-12 right-0"
+            >
+              {/* Manage Admin Roles to create Item */}
+              {user && user.email === "tourbuddy54@gmail.com" && (
+                <Link to={"/createItem"}>
+                  <p className="px-4 py-2 flex items-center gap-3 hover:bg-slate-200 cursor-pointer transition-all duration-100 ease-in-out  text-textColor text-base">
+                    New Item <MdAdd />
+                  </p>
+                </Link>
+              )}
+              {/* Nav link mobile */}
+              <div>
+                <ul>
+                  <li className="text-base text-textColor  px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                    Home
+                  </li>
+                  <li className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                    Menu
+                  </li>
+                  <li className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                    About Us
+                  </li>{" "}
+                  <li className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                    Services
+                  </li>
+                </ul>
+              </div>
+
+              <p className="px-4 py-2 flex items-center gap-3 justify-center bg-gray-300 hover:bg-slate-400 cursor-pointer transition-all duration-100 ease-in-out text-textColor text-base">
+                Log Out <MdLogout />
+              </p>
+            </motion.div>
+          )}
+        </div>
+      </div>
     </header>
   );
 };
