@@ -21,14 +21,14 @@ export const heropData = [
     id: "3",
     name: "Grilled Chicken",
     desc: "Mixed Chicken Plate",
-    price: "5.25",
+    price: "7.25",
     imageSrc: c3,
   },
   {
     id: "4",
-    name: "Fish",
+    name: "Peppered Fish",
     desc: "Suya Fish",
-    price: "5.25",
+    price: "4.80",
     imageSrc: fi1,
   },
 ];

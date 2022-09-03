@@ -47,17 +47,17 @@ const HomeContainer = () => {
             return (
               <div
                 key={data.id}
-                className="w-190 bg-cardOverlay backdrop-blur-md p-2 my-3 rounded-3xl flex flex-col items-center drop-shadow-lg justify-center"
+                className="lg:w-190 bg-cardOverlay backdrop-blur-md p-2 my-3 rounded-3xl flex flex-col items-center drop-shadow-lg justify-center"
               >
                 <img
-                  className="w-40 -mt-20"
+                  className="w-20 lg:w-40 -mt-10 lg:-mt-20"
                   src={data.imageSrc}
-                  alt="Ice Cream"
+                  alt="Recipes"
                 />
-                <p className="text-lg font-semibold text-textColor">
+                <p className=" text-base lg:text-lg mt-2 lg:mt-4 font-semibold text-textColor">
                   {data.name}
                 </p>
-                <p className="text-sm text-lighttextGray font-semibold my-3">
+                <p className=" text-[12px] lg:text-sm text-lighttextGray font-semibold my-1 lg:my-3">
                   {data.desc}
                 </p>
                 <p className="text-sm text-headingColor  font-semibold">
