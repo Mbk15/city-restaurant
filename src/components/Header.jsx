@@ -96,7 +96,7 @@ const Header = () => {
                 className=" w-40 bg-gray-50 absolute rounded-lg shadow-xl flex flex-col top-12 right-0"
               >
                 {/* Manage Admin Roles to create Item */}
-                {user && user.email === "tourbuddy54@gmail.com" && (
+                {user && user.email === "mubarakmuhammadjamiu@gmail.com" && (
                   <Link to={"/createItem"}>
                     <p className="px-4 py-2 flex items-center gap-3 hover:bg-slate-200 cursor-pointer transition-all duration-100 ease-in-out  text-textColor text-base">
                       New Item <MdAdd />
@@ -152,9 +152,12 @@ const Header = () => {
               className=" w-40 bg-gray-50 absolute rounded-lg shadow-xl flex flex-col top-12 right-0"
             >
               {/* Manage Admin Roles to create Item */}
-              {user && user.email === "tourbuddy54@gmail.com" && (
+              {user && user.email === "mubarakmuhammadjamiu@gmail.com" && (
                 <Link to={"/createItem"}>
-                  <p className="px-4 py-2 flex items-center gap-3 hover:bg-slate-200 cursor-pointer transition-all duration-100 ease-in-out  text-textColor text-base">
+                  <p
+                    className="px-4 py-2 flex items-center gap-3 hover:bg-slate-200 cursor-pointer transition-all duration-100 ease-in-out  text-textColor text-base"
+                    onClick={() => setisMenu(false)}
+                  >
                     New Item <MdAdd />
                   </p>
                 </Link>
@@ -162,16 +165,28 @@ const Header = () => {
               {/* Nav link mobile */}
               <div>
                 <ul>
-                  <li className="text-base text-textColor  px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                  <li
+                    className="text-base text-textColor  px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out"
+                    onClick={() => setisMenu(false)}
+                  >
                     Home
                   </li>
-                  <li className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                  <li
+                    className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out"
+                    onClick={() => setisMenu(false)}
+                  >
                     Menu
                   </li>
-                  <li className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                  <li
+                    className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out"
+                    onClick={() => setisMenu(false)}
+                  >
                     About Us
                   </li>{" "}
-                  <li className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out">
+                  <li
+                    className="text-base text-textColor px-4 py-2  hover:bg-slate-200 cursor-pointer duration-100 transition-all ease-in-ease-out"
+                    onClick={() => setisMenu(false)}
+                  >
                     Services
                   </li>
                 </ul>
