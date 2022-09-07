@@ -98,7 +98,10 @@ const Header = () => {
                 {/* Manage Admin Roles to create Item */}
                 {user && user.email === "mubarakmuhammadjamiu@gmail.com" && (
                   <Link to={"/createItem"}>
-                    <p className="px-4 py-2 flex items-center gap-3 hover:bg-slate-200 cursor-pointer transition-all duration-100 ease-in-out  text-textColor text-base">
+                    <p
+                      onClick={() => setisMenu(false)}
+                      className="px-4 py-2 flex items-center gap-3 hover:bg-slate-200 cursor-pointer transition-all duration-100 ease-in-out  text-textColor text-base"
+                    >
                       New Item <MdAdd />
                     </p>
                   </Link>
