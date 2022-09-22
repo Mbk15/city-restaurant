@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useStateValue } from "../context/StateProvider";
+import { getAllFoodItems } from "../utils/firebaseFunction";
+import { actionType } from "../context/reducer";
 import { motion } from "framer-motion";
 import {
   MdAttachMoney,
@@ -27,6 +30,7 @@ const CreateContainer = () => {
   const [alertSatus, setAlertSatus] = useState("danger");
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [{ foodItems }, dispatch] = useStateValue();
   // Function to upload image to firebase
   const uploadImage = (e) => {
     setIsLoading(true);
@@ -108,13 +112,25 @@ const CreateContainer = () => {
           setFields(false);
           clearData();
         }, 4000);
+
+        fetchData();
       }
+
       const clearData = () => {
         setTitle("");
         setCalories("");
         setImageAsset("");
         setPrice("");
         setCategory("Select Category");
+      };
+
+      const fetchData = async () => {
+        await getAllFoodItems().then((data) => {
+          dispatch({
+            type: actionType.SET_FOOD_ITEMS,
+            foodItems: data,
+          });
+        });
       };
     } catch (error) {
       setFields(true);
