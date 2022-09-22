@@ -8,8 +8,14 @@ import {
   MdFoodBank,
 } from "react-icons/md";
 import { categories } from "../utils/data";
+import { saveItem } from "../utils/firebaseFunction";
 import Loader from "./Loader";
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { storage } from "../firebase.config";
 const CreateContainer = () => {
   const [title, setTitle] = useState("");
@@ -57,8 +63,69 @@ const CreateContainer = () => {
       }
     );
   };
-  const deleteImage = () => {};
-  const saveDetails = () => {};
+  const deleteImage = () => {
+    setIsLoading(true);
+    const deleteRef = ref(storage, imageAsset);
+    deleteObject(deleteRef).then(() => {
+      setImageAsset(null);
+      setIsLoading(false);
+      setFields(true);
+      setMsg("Image deleted Successfully");
+      setAlertSatus("success");
+      setTimeout(() => {
+        setFields(false);
+      }, 4000);
+    });
+  };
+  const saveDetails = () => {
+    setIsLoading(true);
+    try {
+      if (!title || !categories || !imageAsset || !price || !calories) {
+        setFields(true);
+        setMsg("Required Fields Can't be empty");
+        setAlertSatus("danger");
+        setTimeout(() => {
+          setFields(false);
+          setIsLoading(false);
+        }, 4000);
+      } else {
+        const data = {
+          id: `${Date.now()}`,
+          title: title,
+          imageURL: imageAsset,
+          category: category,
+          calories: calories,
+          qty: 1,
+          price: price,
+        };
+        saveItem(data);
+        setIsLoading(false);
+        setFields(true);
+        setMsg("Data Uploaded Successfully");
+
+        setAlertSatus("success");
+        setTimeout(() => {
+          setFields(false);
+          clearData();
+        }, 4000);
+      }
+      const clearData = () => {
+        setTitle("");
+        setCalories("");
+        setImageAsset("");
+        setPrice("");
+        setCategory("Select Category");
+      };
+    } catch (error) {
+      setFields(true);
+      setMsg("Error while Uploading : Try Again");
+      setAlertSatus("danger");
+      setTimeout(() => {
+        setFields(false);
+        setIsLoading(false);
+      }, 4000);
+    }
+  };
   return (
     <div className="w-full min-h-screen flex items-center justify-center">
       <div className="w-[90%] md:w-[75%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center">
